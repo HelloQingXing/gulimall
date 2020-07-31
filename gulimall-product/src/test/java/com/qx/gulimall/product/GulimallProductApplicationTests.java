@@ -5,6 +5,8 @@ package com.qx.gulimall.product;
 import com.qx.gulimall.product.service.AttrService;
 import com.qx.gulimall.product.service.CategoryService;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 class GulimallProductApplicationTests {
@@ -23,6 +26,8 @@ class GulimallProductApplicationTests {
   private CategoryService categoryService;
   @Autowired
   private AttrService attrService;
+  @Autowired
+  private RedissonClient redissonClient;
 
   @Test
   void contextLoads() throws Throwable {
@@ -45,5 +50,36 @@ class GulimallProductApplicationTests {
     objectObjectHashMap.put("limit","10");
     objectObjectHashMap.put("key","1");
     attrService.queryBasePage(objectObjectHashMap,225L);
+  }
+
+  @Test
+  void redissonTest(){
+    // java.lang.IllegalArgumentException: Redis url should start with redis:// or rediss:// (for SSL connection)
+    System.out.println(redissonClient);
+  }
+
+  @Test
+  public void redissonSimpleOperation() throws InterruptedException {
+
+    for (int i = 0; i < 20; i++) {
+      new Thread(
+          () -> {
+
+            RLock lock = redissonClient.getLock("lock");
+
+            try {
+              lock.lock(30, TimeUnit.SECONDS);
+              System.out.println("执行线程" + Thread.currentThread().getId());
+              Thread.sleep(10000);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            } finally {
+//              lock.unlock();
+            }
+          });
+    }
+
+
+
   }
 }

@@ -1,0 +1,30 @@
+spring:
+#  数据源配置
+  datasource:
+    url: jdbc:mysql://192.168.56.10:3306/gulimall_oms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    username: root
+  profiles:
+    active: dev
+  # 服务名
+  application:
+    name: gulimall-order
+  # nacos
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+# 端口号
+server:
+  port: 9070
+mybatis-plus:
+  # 默认扫描mapper包
+  mapper-locations: classpath:**/mapper/**/*.xml
+  # Mybatis-Plus日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto

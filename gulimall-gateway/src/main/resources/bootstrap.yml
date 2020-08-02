@@ -1,0 +1,33 @@
+server:
+  port: 88
+spring:
+  application:
+    name: gulimall-gateway
+  cloud:
+#    gateway:
+#      routes:
+#        - id: gulimall-gateway
+#          uri: lb://gulimall-gateway
+#          predicates:
+#            - Path=/**
+#        - id: baidu-test
+#          uri: http://www.baidu.com
+#          predicates:
+#            - Query=uri,baidu
+#        - id: qq-test
+#          uri: http://www.qq.com
+#          predicates:
+#            - Query=param,qq
+    nacos:
+      discovery:
+        # 只能放在public空间才能找到其他微服务
+#        namespace: 4df967df-2df4-4560-b0a3-d19cb02abd3a
+        server-addr: localhost:8848
+      config:
+#        namespace: 4df967df-2df4-4560-b0a3-d19cb02abd3a
+        server-addr: localhost:8848
+        file-extension: yaml
+#        extension-configs:
+#        - dataId: gulimall-gateway.yaml
+#          group: DEFAULT_GROUP
+#          refresh: true

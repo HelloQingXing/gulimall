@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qx.gulimall.product.dao.ProductAttrValueDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.qx.gulimall.product.entity.ProductAttrValueEntity" id="productAttrValueMap">
+        <result property="id" column="id"/>
+        <result property="spuId" column="spu_id"/>
+        <result property="attrId" column="attr_id"/>
+        <result property="attrName" column="attr_name"/>
+        <result property="attrValue" column="attr_value"/>
+        <result property="attrSort" column="attr_sort"/>
+        <result property="quickShow" column="quick_show"/>
+    </resultMap>
+
+
+    <update id="updateBySpuId">
+        update pms_product_attr_value
+        <set>
+            <if test="entity.attrName != null">
+                attr_name = #{entity.attrName},
+            </if>
+            <if test="entity.attrValue != null">
+                attr_value = #{entity.attrValue},
+            </if>
+            <if test="entity.quickShow != null">
+                quick_show = #{entity.quickShow}
+            </if>
+        </set>
+        <where>
+            <if test="entity.attrId != null">
+                attr_id = #{entity.attrId}
+            </if>
+            <if test="entity.spuId != null">
+                and spu_id = #{entity.spuId}
+            </if>
+        </where>
+    </update>
+
+
+</mapper>

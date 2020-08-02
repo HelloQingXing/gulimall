@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: gulimall-product
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        namespace: 299bd918-6f00-4c58-9796-62fa962d2e89
+        # 如果在nacos配置中心的配置文件是yaml格式的，必须在bootstrap中指明
+        file-extension: yaml

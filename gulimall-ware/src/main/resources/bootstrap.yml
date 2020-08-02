@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: gulimall-ware
+  cloud:
+    nacos:
+      config:
+        # nacos地址
+        server-addr: localhost:8848
+        # 命名空间
+#        namespace: 2239f495-6d59-440d-ad73-e661374610af

@@ -1,0 +1,36 @@
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: renren-fast
+##          lb://：负载均衡，必须带上后面//
+#          uri: lb://renren-fast
+#          predicates:
+##                错误写法不是:而是=
+##            - Path:/api/**
+#            - Path=/api/**
+#          filters:
+#            # 发送到该请求（http://localhost:88/api/renren-fast/captcha.jpg）时，重定向到http://localhost:8080/renren-fast/captcha.jpg
+#            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+#
+#        - id: gulimall-third-party
+#          uri: lb://gulimall-third-party
+#          predicates:
+#            - Path=/api/thirdparty/**
+#          filters:
+#            - RewritePath=/api/(?<segment>.*),/$\{segment}
+#
+#        - id: gulimall-product
+#          uri: lb://gulimall-product
+#          predicates:
+#            - Path=/product/category/**
+#        - id: gulimall-member
+#          uri: lb://gulimall-member
+#          predicates:
+#            - Path=/api/member/**
+#          filters:
+#            - RewritePath=/api/(?<segment>.*),/$\{segment}
+##      discovery:
+##        locator:
+##          enabled: true
+#

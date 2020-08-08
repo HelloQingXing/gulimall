@@ -220,4 +220,50 @@ class GulimallElasticsearchApplicationTests {
 //      System.out.println(a.length());
     }
   }
+
+  /**
+   * n阶台阶，每次只能走一步或两步，共多少种走法
+   */
+  @Test
+  void sum(){
+
+//    int count = count(5);
+    int count = loopCount(40);
+    System.out.println(count);
+  }
+
+  int count(int n){
+    if(n == 1){
+      return 1;
+    }
+    if(n == 2){
+      return 2;
+    }
+
+    return count(n-1) + count(n-2);
+  }
+
+  int loopCount(int n){
+
+    if(n == 1 | n ==2){
+      return n;
+    }
+    // n的上两步共有多少种走法，初始化为1
+    int one = 1;
+    // n的上一步共有多少种走法，初始化为2
+    int two = 2;
+    // 共有多少种走法
+    int sum = 0;
+    for(int i = 3 ; i <= n ; i ++){
+      // 计算n=i时总步数
+      sum = one + two;
+      // 将f(2)上两步数赋值给上一步
+      one = two;
+      // 将总步数赋值给上两步
+      two = sum;
+  }
+
+    return sum;
+  }
+
 }

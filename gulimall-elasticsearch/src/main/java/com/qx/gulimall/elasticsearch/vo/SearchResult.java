@@ -3,6 +3,7 @@ package com.qx.gulimall.elasticsearch.vo;
 import com.qx.common.dto.es.SkuESModel;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,23 +30,41 @@ public class SearchResult {
      * 页面展示所有分类信息
      */
     private List<Catelog> categorys;
+    /**
+     * 面包屑——导航条
+     */
+    private List<NavVo> navVos = new ArrayList<>();
 
     /**
      * 分页数据
      */
     /**
-     * 挡墙页
+     * 当前页，默认第一页
      */
-    private Long current;
+    private Integer current = 1;
+    /**
+     * 总记录数
+     */
+    private Integer total;
     /**
      * 总页数
      */
-    private Long total;
-    /**
-     * 每页显示数
-     */
-    private Long size;
+    private Integer totalPage;
+    /*
+    * 页码
+    * */
+    private  List<Integer> pageNums;
 
+    /*NavVo 面包屑 -- 导航条*/
+    @Data
+    public static class NavVo{
+        private String NavName;
+        private String NavValue;
+        /**
+         * 清除该面包屑后跳转地址
+         */
+        private String link;
+    }
 
     @Data
     public static class Brand {
@@ -66,7 +85,7 @@ public class SearchResult {
 
         private Long attrId;
         private String attrName;
-        private String attrValue;
+        private List<String> attrValue;
     }
 
 }

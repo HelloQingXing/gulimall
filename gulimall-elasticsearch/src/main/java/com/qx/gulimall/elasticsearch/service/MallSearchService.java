@@ -3,7 +3,7 @@ package com.qx.gulimall.elasticsearch.service;
 import com.qx.gulimall.elasticsearch.vo.SearchParam;
 import com.qx.gulimall.elasticsearch.vo.SearchResult;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Classname MallSearchService
@@ -12,5 +12,5 @@ import java.io.IOException;
  * @Created by 卿星
  */
 public interface MallSearchService {
-    SearchResult searchByParam(SearchParam searchParam) throws IOException;
+    SearchResult searchByParam(SearchParam searchParam, HttpServletRequest request);
 }

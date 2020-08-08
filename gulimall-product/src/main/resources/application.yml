@@ -51,7 +51,7 @@ spring:
 
   thymeleaf:
     ## 开启缓存
-    cache: false
+    cache: true
   ## redis配置
   redis:
     host: 192.168.56.10

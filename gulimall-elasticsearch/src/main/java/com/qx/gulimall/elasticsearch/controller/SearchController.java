@@ -11,7 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Classname SearchController
@@ -26,15 +30,10 @@ public class SearchController {
     private MallSearchService mallSearchService;
 
     @GetMapping(value = {"/","list.html"})
-    public String search(SearchParam searchParam,Model model){
+    public String search(SearchParam searchParam, Model model, HttpServletRequest request){
 
         SearchResult result = null;
-        try {
-            result = mallSearchService.searchByParam(searchParam);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            result = mallSearchService.searchByParam(searchParam , request);
         model.addAttribute("data",result);
 
         return "list";

@@ -12,6 +12,31 @@
         <result property="attrValue" column="attr_value"/>
         <result property="attrSort" column="attr_sort"/>
     </resultMap>
+    <resultMap id="saleAttr" type="com.qx.gulimall.product.entity.vo.sku.SaleAttr">
+        <result column="attr_id" property="attrId"/>
+        <result column="attr_name" property="attrName"/>
+        <collection property="valueWithSkuIds" ofType="com.qx.gulimall.product.entity.vo.sku.AttrValueWithSkuIds">
+            <result column="attr_value" property="attrValue"/>
+            <result column="skuIds" property="skuIds"/>
+        </collection>
+    </resultMap>
+    <select id="listSaleAttrBySkuIds" resultMap="saleAttr">
+        SELECT
+          attr_id,
+          attr_name,
+          attr_value,
+          GROUP_CONCAT(sku_id) skuIds
+        FROM
+          pms_sku_sale_attr_value
+        WHERE sku_id IN
+            <foreach collection="skuIds" item="skuId" separator="," open="(" close=")">
+                #{skuId}
+            </foreach>
+        GROUP BY
+          attr_id,
+          attr_name,
+          attr_value
+    </select>
 
 
 </mapper>

@@ -87,7 +87,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
           return categoryReturnList;
       }*/
-      @Cacheable(value = "category",sync = true)
+  @Cacheable(value = "categoryTree",sync = true)
   @Override
   public List<CategoryEntity> listTree() {
 
@@ -198,7 +198,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
   }
 
-  @Cacheable(value = "category",sync = true)
+  @Cacheable(value = "categoryLevel1",sync = true)
   @Override
   public List<CategoryEntity> getLevel1Catlog() {
 
@@ -226,7 +226,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
      * @return
      */
     @Override
-    @Cacheable(value = "category",sync = true)
     public Map<String, List<Catelog2Vo>> getCatelogWithOrder(){
       return getCategoryOrderFromDb();
     }
@@ -382,7 +381,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
   }
 
-
+  @Cacheable(value = "category",sync = true)
   public Map<String, List<Catelog2Vo>> getCategoryOrderFromDb() {
     System.out.println("from db");
     // 获取一级分类，只需要获取一级分类及其后代们的分类

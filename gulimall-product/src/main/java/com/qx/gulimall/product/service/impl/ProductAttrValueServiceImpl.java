@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -49,6 +48,22 @@ public class ProductAttrValueServiceImpl extends ServiceImpl<ProductAttrValueDao
 
 //        this.baseMapper.updateBatchBySpuId(attrValueEntityList); //  mybatis不能在一个sql语句中执行多个更新操作
 
+    }
+
+    @Override
+    public List<ProductAttrValueEntity> listByAttrIds(List<Long> attrIds) {
+        QueryWrapper<ProductAttrValueEntity> wrapper = new QueryWrapper<ProductAttrValueEntity>().in("attr_id", attrIds);
+        return this.list(wrapper);
+    }
+
+    @Override
+    public List<ProductAttrValueEntity> listByAttrIdsAndSpuId(List<Long> attrIds, Long spuId) {
+        // 构造包装类
+        QueryWrapper<ProductAttrValueEntity> wrapper = new QueryWrapper<ProductAttrValueEntity>()
+                .eq("spu_id", spuId)
+                .in("attr_id", attrIds);
+        List<ProductAttrValueEntity> list = this.list(wrapper);
+        return list;
     }
 
 }

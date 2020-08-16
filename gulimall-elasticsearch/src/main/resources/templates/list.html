@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="static/search/css/index.css">
     <link rel="stylesheet" type="text/css" href="static/search/font/iconfont.css">
     <!--<script src="static/search/js/jquery-3.2.1.min.js"></script>-->
-    <script src="static/search/js/jquery-1.12.4.js"></script>
+    <script src="static/itemstatic/search/js/jquery-1.12.4.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -76,7 +76,7 @@
             <span>|</span>
             <li class="header_wdjd" style="width:80px;">
                 <a href="#">我的谷粒商城</a>
-                <img src="static/search/image/down-@1x.png"/>
+                <img src="static/itemstatic/search/image/down-@1x.png"/>
                 <!--<b class="glyphicon glyphicon-menu-down"></b>-->
                 <div class="header_wdjd_txt">
                     <ul>
@@ -126,7 +126,7 @@
             <span>|</span>
             <li class="header_wdjd1">
                 <a href="#">客户服务</a>
-                <img src="static/search/image/down-@1x.png"/>
+                <img src="static/itemstatic/search/image/down-@1x.png"/>
                 <!--<b class="glyphicon glyphicon-menu-down"></b>-->
                 <div class="header_wdjd_txt">
                     <ul>
@@ -182,7 +182,7 @@
             <span>|</span>
             <li class="header_wzdh">
                 <a href="#">网站导航</a>
-                <img src="static/search/image/down-@1x.png"/>
+                <img src="static/itemstatic/search/image/down-@1x.png"/>
                 <!--<b class="glyphicon glyphicon-menu-down"></b>-->
                 <div class="header_wzdh_txt">
                     <ul style="width: 25%;">
@@ -389,7 +389,7 @@
             <li class="header_sjjd">
                 <a href="#">手机谷粒商城</a>
                 <div class="header_sjjd_div">
-                    <img src="static/search/img/01.png"/>
+                    <img src="static/itemstatic/search/img/01.png"/>
                 </div>
             </li>
         </ul>
@@ -399,7 +399,7 @@
 <!--搜索导航-->
 <div class="header_sous">
     <div class="logo">
-        <a href="#"><img src="static/search/image/logo1.jpg" alt=""></a>
+        <a href="#"><img src="static/itemstatic/search/image/logo1.jpg" alt=""></a>
     </div>
     <div class="header_form">
         <input type="text" th:placeholder="${param.get('keyword')}" id="keyword"/>
@@ -408,7 +408,7 @@
     <div class="header_ico">
         <div class="header_gw">
             <span><a href="#">我的购物车</a></span>
-            <img src="static/search/image/settleup-@1x.png"/>
+            <img src="static/itemstatic/search/image/settleup-@1x.png"/>
             <span>0</span>
         </div>
         <div class="header_ko">
@@ -598,7 +598,7 @@
                     </ol>
                     <div class="header_r">
                         <div class="header_r_tu">
-                            <a href="#"><img src="static/search/img/56b2f385n8e4eb051.jpg"/></a>
+                            <a href="#"><img src="static/itemstatic/search/img/56b2f385n8e4eb051.jpg"/></a>
                             <a href="#"><img src="static/search/img/56b2f385n8e4eb051.jpg"/></a>
                             <a href="#"><img src="static/search/img/56b2f385n8e4eb051.jpg"/></a>
                             <a href="#"><img src="static/search/img/56b2f385n8e4eb051.jpg"/></a>
@@ -1246,7 +1246,8 @@
                                 <a href="#">关注</a>
                             </div>
                             <p class="da">
-                                <a href="#" th:title="${product.skuTitle}">
+                                <!--||：转为字符串-->
+                                <a th:href="|http://item.gulimall.com/${product.skuId}.html|" th:title="${product.skuTitle}">
                                     <img th:src="${product.brandImg}" class="dim">
                                 </a>
                             </p>

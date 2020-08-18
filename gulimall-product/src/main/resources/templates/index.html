@@ -97,10 +97,10 @@
   					</b>
         <ul>
           <li>
-            <a href="/登录页面\index.html">你好，请登录</a>
+            <a href="http://auth.gulimall.com/login.html">你好，请登录</a>
           </li>
           <li>
-            <a href="/注册页面\index.html" class="li_2">免费注册</a>
+            <a href="http://auth.gulimall.com/register.html" class="li_2">免费注册</a>
           </li>
           <span>|</span>
           <li>
@@ -115,7 +115,7 @@
     <div class="header_sous">
       <div class="header_form">
         <input id="searchText" type="text" placeholder="" />
-        <span style="background: url(/staitc/index/img/img_12.png) 0 -1px;"></span>
+        <span style="background: url('/staitc/index/img/img_12.png') 0 -1px;"></span>
         <!--<button><i class="glyphicon"></i></button>-->
         <a href="#" ><img src="static/index/img/img_09.png" onclick="search()" /></a>
       </div>
@@ -202,11 +202,14 @@
     <div class="header_main">
       <div class="header_banner">
         <div class="header_main_left">
-          <ul>
+          <ul style="margin-top: 10px;">
             <!--<li>
               <a href="#" class="header_main_left_a" ctg-data="3"><b>家用电器</b></a>
             </li>-->
             <li class="header_li2" th:each="category : ${categorys}">
+
+
+
               <a href="#" class="header_main_left_a" th:attr="ctg-data=${category.catId}" ><b th:text="${category.name}"></b></a>
 
             </li>
@@ -250,8 +253,8 @@
               <div class="user_info_show">
                 <p class="">Hi, 欢迎来到!</p>
                 <p>
-                  <a href="#" class="">登录</a>
-                  <a href="#" class="">注册</a>
+                  <a href="http://auth.gulimall.com/login.html" class="">登录</a>
+                  <a href="http://auth.gulimall.com/register.html" class="">注册</a>
                 </p>
               </div>
             </div>

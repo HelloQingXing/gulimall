@@ -154,16 +154,16 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
         }*/
         // 获取所有销售属性
         // 查询当前spu（spuId）下的所有sku（skuId）
-        CompletableFuture<Void> saleAttrFuture = skuInfoFuture.thenAccept(skuInfo -> {
+        CompletableFuture<Void> saleAttrFuture = skuInfoFuture.thenAcceptAsync(skuInfo -> {
             List<Object> skuIds = this.listObjs(new QueryWrapper<SkuInfoEntity>()
                     .eq("spu_id", skuInfo.getSpuId()).select("sku_id"));
             List<SkuItemVo.SaleAttr> saleAttrs = skuSaleAttrValueService
                     .listSaleAttrBySkuIds(skuIds);
 
             skuItemVo.setSaleAttrs(saleAttrs);
-        });
+        },executor);
 
-        CompletableFuture<Void> baseAttrFuture = skuInfoFuture.thenAccept(s -> {
+        CompletableFuture<Void> baseAttrFuture = skuInfoFuture.thenAcceptAsync(s -> {
             List<SkuItemVo.AttrGroupVo> attrGroupVos = new ArrayList<>();
             // 获取分组
             List<AttrGroupEntity> groupEntities = attrGroupService
@@ -195,14 +195,17 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
                 attrGroupVos.add(groupAttr);
             }
             skuItemVo.setBaseAttrs(attrGroupVos);
-        });
+        },executor);
 
         // sku图片
-        CompletableFuture<Void> imgFuture = skuInfoFuture.thenAcceptAsync((s) -> {
+        CompletableFuture<Void> imgFuture = CompletableFuture.runAsync(() -> {
             List<SkuImagesEntity> skuImages = skuImagesService
                     .list(new QueryWrapper<SkuImagesEntity>()
                             .eq("sku_id", skuId));
             skuItemVo.setSkuImages(skuImages);
+        }, executor);
+
+        CompletableFuture<Void> spuInfoFuture = skuInfoFuture.thenAcceptAsync((s) -> {
             // spu介绍
             SpuInfoDescEntity spuInfoDescEntity = spuInfoDescService.getById(s.getSpuId());
             skuItemVo.setSpuInfoDesc(spuInfoDescEntity);
@@ -210,9 +213,10 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
         // 等待所有结果完成
         try {
-            CompletableFuture.allOf(saleAttrFuture,baseAttrFuture,imgFuture).get();
+            CompletableFuture.allOf(saleAttrFuture,baseAttrFuture,imgFuture,spuInfoFuture).get();
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException("详情页数据加载失败");
         }
 
         return skuItemVo;

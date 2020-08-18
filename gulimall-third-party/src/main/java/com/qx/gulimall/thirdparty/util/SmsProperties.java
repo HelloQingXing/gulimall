@@ -1,0 +1,25 @@
+package com.qx.gulimall.thirdparty.util;
+
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+/**
+ * @Classname SmsProperties
+ * @Description 短信参数
+ * @Date 2020/8/18 19:15
+ * @Created by 卿星
+ */
+@Data
+@Component
+//注意prefix要写到最后一个 "." 符号之前
+@ConfigurationProperties(prefix = "aliyun.sms")
+public class SmsProperties {
+
+    private String regionId;
+    private String keyId;
+    private String keySecret;
+    private String templateCode;
+    private String signName;
+
+}

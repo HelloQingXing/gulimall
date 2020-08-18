@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @Date 2020/8/16 23:37
  * @Created by 卿星
  */
-@ConfigurationProperties("thread.pool")
+@ConfigurationProperties("gulimall.thread.pool")
 @Component
 @Data
 public class ThreadPoolProperties {

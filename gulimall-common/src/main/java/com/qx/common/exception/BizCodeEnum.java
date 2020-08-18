@@ -14,6 +14,7 @@ package com.qx.common.exception;
  * 错误码列表：
  *  10: 通用
  *      001：参数格式校验
+ *      002：短信验证码发送频率过快，60秒内只能发送一次
  *  11: 商品
  *  12: 订单
  *  13: 购物车
@@ -23,6 +24,7 @@ public enum  BizCodeEnum {
 
     UNKNOW_EXEPTION(10000,"未知异常"),
     VALID_EXCEPTION(10001,"参数格式效验失败"),
+    SMS_FREQUENCY_FAST_EXCEPTION(10002,"短信验证码发送频率过快，60秒内只能发送一次"),
     PRODUCT_UP_EXCEPTION(11000,"上架失败"),
     ;
 
